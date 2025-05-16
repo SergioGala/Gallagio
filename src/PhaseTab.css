@@ -1,0 +1,191 @@
+/* PhaseTab.css */
+/* Estilos para el componente PhaseTab */
+
+.phase-tab {
+  position: relative;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid transparent;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.phase-tab:focus {
+  outline: none;
+}
+
+.phase-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.phase-tab:hover::before {
+  opacity: 1;
+}
+
+.phase-tab-active {
+  background-color: rgb(79, 70, 229);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: rgb(99, 102, 241);
+}
+
+.phase-tab-inactive {
+  background-color: rgb(55, 65, 81);
+  color: rgb(209, 213, 219);
+  border-color: transparent;
+}
+
+.phase-tab-inactive:hover {
+  background-color: rgb(75, 85, 99);
+  color: white;
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.phase-tab-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.phase-tab:hover .phase-tab-number {
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+}
+
+.phase-tab-active .phase-tab-number {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.phase-tab-icon {
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.phase-tab:hover .phase-tab-icon {
+  transform: rotate(15deg);
+}
+
+.phase-tab-text {
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.phase-tab-active .phase-tab-text {
+  font-weight: 600;
+}
+
+.phase-tab-label {
+  font-size: 0.75rem;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.phase-tab-badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  background-color: rgb(239, 68, 68);
+  color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(31, 41, 55);
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+.phase-tab-difficulty-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.phase-tab-difficulty-easy {
+  background-color: rgb(16, 185, 129);
+  box-shadow: 0 0 5px rgba(16, 185, 129, 0.7);
+}
+
+.phase-tab-difficulty-medium {
+  background-color: rgb(245, 158, 11);
+  box-shadow: 0 0 5px rgba(245, 158, 11, 0.7);
+}
+
+.phase-tab-difficulty-hard {
+  background-color: rgb(239, 68, 68);
+  box-shadow: 0 0 5px rgba(239, 68, 68, 0.7);
+}
+
+.phase-tab-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.7);
+}
+
+.phase-tab-active .phase-tab-glow,
+.phase-tab:hover .phase-tab-glow {
+  opacity: 1;
+}
+
+.phase-tab-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+}
+
+.phase-tab:hover .phase-tab-highlight {
+  transform: translateX(100%);
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}

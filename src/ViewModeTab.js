@@ -1,21 +1,64 @@
-// ViewModeTab.js
+// ViewModeTab.js - Versión mejorada
 // Componente para pestañas de modos de visualización
 
 import React from 'react';
+import './ViewModeTab.css';
 
 const ViewModeTab = ({ mode, currentMode, onClick }) => {
-  const label = 
-    mode === 'mechanics' ? 'Mecánicas Clave' : 
-    mode === 'timeline' ? 'Línea de Tiempo' : 
-    'Estrategia';
+  const isActive = currentMode === mode;
+  
+  // Determinar el texto y el icono según el modo
+  const getTabInfo = () => {
+    switch(mode) {
+      case 'mechanics':
+        return {
+          text: 'Mecánicas Clave',
+          icon: '⚙️'
+        };
+      case 'timeline':
+        return {
+          text: 'Línea de Tiempo',
+          icon: '⏱️'
+        };
+      case 'strategy':
+        return {
+          text: 'Estrategia',
+          icon: '📋'
+        };
+      case 'preparation':
+        return {
+          text: 'Preparación',
+          icon: '🧰'
+        };
+      case 'video':
+        return {
+          text: 'Video',
+          icon: '📹'
+        };
+      default:
+        return {
+          text: 'Desconocido',
+          icon: '❓'
+        };
+    }
+  };
+  
+  const { text, icon } = getTabInfo();
     
   return (
-    <button
-      className={`px-4 py-2 ${currentMode === mode ? 'border-b-2 border-indigo-500 text-indigo-400' : 'text-gray-400'}`}
+    <div
+      className={`view-mode-tab ${isActive ? 'active' : 'inactive'}`}
       onClick={() => onClick(mode)}
+      role="tab"
+      aria-selected={isActive}
     >
-      {label}
-    </button>
+      <div className="view-mode-tab-highlight"></div>
+      
+      <div className="view-mode-tab-content">
+        <span className="view-mode-tab-icon">{icon}</span>
+        <span className="view-mode-tab-text">{text}</span>
+      </div>
+    </div>
   );
 };
 

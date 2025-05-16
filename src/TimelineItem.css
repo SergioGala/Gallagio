@@ -1,0 +1,281 @@
+/* TimelineItem.css */
+/* Estilos para el componente TimelineItem */
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item:hover {
+  transform: translateX(5px);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 1.5rem;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item-marker {
+  position: absolute;
+  left: -10px;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item:hover .timeline-item-marker {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-item-marker-danger {
+  background-color: rgba(239, 68, 68, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-warning {
+  background-color: rgba(245, 158, 11, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-success {
+  background-color: rgba(16, 185, 129, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-important {
+  background-color: rgba(139, 92, 246, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-heal {
+  background-color: rgba(52, 211, 153, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-tank {
+  background-color: rgba(59, 130, 246, 0.8);
+  color: #fff;
+}
+
+.timeline-item-marker-default {
+  background-color: rgba(107, 114, 128, 0.8);
+  color: #fff;
+}
+
+.timeline-item-time {
+  font-family: monospace;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-item-time {
+  color: #fff;
+}
+
+.timeline-item-event {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-item-event::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 1.2s ease;
+}
+
+.timeline-item:hover .timeline-item-event::after {
+  transform: translateX(100%);
+}
+
+.timeline-item-event-danger {
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.timeline-item-event-warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.timeline-item-event-success {
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.timeline-item-event-important {
+  background-color: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.timeline-item-event-heal {
+  background-color: rgba(52, 211, 153, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.timeline-item-event-tank {
+  background-color: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.timeline-item-event-default {
+  background-color: rgba(107, 114, 128, 0.15);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.timeline-item-content {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+.timeline-item-role {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.timeline-item-role-tag {
+  padding: 0.125rem 0.375rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.timeline-item-role-tag svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+.timeline-item-role-tank {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: rgba(96, 165, 250);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.timeline-item-role-healer {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: rgba(52, 211, 153);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.timeline-item-role-dps {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: rgba(248, 113, 113);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.timeline-item-role-all {
+  background-color: rgba(139, 92, 246, 0.2);
+  color: rgba(167, 139, 250);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.timeline-item-details {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+.timeline-item-details-section {
+  margin-bottom: 0.5rem;
+}
+
+.timeline-item-details-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.timeline-item-details-title svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.25rem;
+}
+
+.timeline-item-details-content {
+  font-size: 0.75rem;
+  padding-left: 1.125rem;
+}
+
+.timeline-item-details-action {
+  margin-top: 0.5rem;
+  color: rgba(96, 165, 250);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.timeline-item-details-action:hover {
+  text-decoration: underline;
+}
+
+.timeline-item-details-action svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
