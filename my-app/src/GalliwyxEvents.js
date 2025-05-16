@@ -103,7 +103,7 @@ const loadGalliwyxEvents = (setBossEvents, setEncounterSettings, setEncounterDur
   setBossEvents(GALLYWIX_HC_EVENTS);
   setEncounterSettings({
     name: "Chrome King Gallywix",
-    difficulty: "Heroico",
+    difficulty: "Heroicok",
   });
   setEncounterDuration(360); // 6 minutos de duración
 };
