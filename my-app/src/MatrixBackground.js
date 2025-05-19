@@ -1,11 +1,5 @@
-// MatrixBackground.js (con estilos CSS integrados)
+// MatrixBackground.js - Simplificado y más sutil
 import React, { useState, useEffect } from 'react';
-
-// Función para generar un carácter aleatorio del estilo Matrix
-const generateMatrixChar = () => {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
-  return chars.charAt(Math.floor(Math.random() * chars.length));
-};
 
 const MatrixBackground = () => {
   const [matrixChars, setMatrixChars] = useState([]);
@@ -13,6 +7,12 @@ const MatrixBackground = () => {
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
+
+  // Función para generar un carácter aleatorio del estilo Matrix
+  const generateMatrixChar = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+    return chars.charAt(Math.floor(Math.random() * chars.length));
+  };
 
   // Inicializar el efecto Matrix
   useEffect(() => {
@@ -30,17 +30,17 @@ const MatrixBackground = () => {
     // Crear streams de caracteres Matrix
     const initMatrix = () => {
       const screenWidth = dimensions.width;
-      const numStreams = Math.floor(screenWidth / 20); // Aproximadamente 20px por stream
+      const numStreams = Math.floor(screenWidth / 40); // Más espaciados para ser menos intrusivos
       const newMatrixChars = [];
       
       for (let i = 0; i < numStreams; i++) {
         newMatrixChars.push({
           x: Math.random() * 100, // Porcentaje a lo ancho de la pantalla
           y: Math.random() * 100, // Porcentaje a lo alto de la pantalla
-          speed: 0.2 + Math.random() * 0.8, // Velocidad de caída
-          length: 5 + Math.floor(Math.random() * 15), // Longitud del rastro
-          chars: Array(15).fill().map(() => generateMatrixChar()), // Caracteres a mostrar
-          opacity: 0.1 + Math.random() * 0.4, // Opacidad del rastro
+          speed: 0.1 + Math.random() * 0.4, // Velocidad de caída (más lenta)
+          length: 3 + Math.floor(Math.random() * 5), // Longitud del rastro (más corta)
+          chars: Array(5).fill().map(() => generateMatrixChar()), // Caracteres a mostrar
+          opacity: 0.05 + Math.random() * 0.1, // Opacidad muy baja
         });
       }
       
@@ -65,7 +65,7 @@ const MatrixBackground = () => {
           return { ...stream, y: newY, chars: newChars };
         });
       });
-    }, 100);
+    }, 200); // Más lento
     
     // Limpieza
     return () => {

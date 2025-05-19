@@ -1,4 +1,4 @@
-// DataContext.js
+// DataContext.js con función añadida para actualizar todo el array
 import React, { createContext, useState, useContext } from 'react';
 import { WOW_CLASSES, DEFAULT_BOSS_EVENTS } from './WowClassData';
 
@@ -59,6 +59,31 @@ export const DataProvider = ({ children }) => {
     // Si cambia la clase o spec, eliminar asignaciones existentes
     if (field === 'class' || field === 'spec') {
       setAssignments(assignments.filter(assignment => assignment.healerId !== id));
+    }
+  };
+  
+  // NUEVA FUNCIÓN: Actualizar todos los miembros del raid de una vez
+  const updateRaidMembers = (newRaidMembers) => {
+    // Identificar qué miembros han cambiado de clase o spec
+    const changedMembers = [];
+    
+    raidMembers.forEach(oldMember => {
+      const newMember = newRaidMembers.find(m => m.id === oldMember.id);
+      if (newMember && (
+          newMember.class !== oldMember.class || 
+          newMember.spec !== oldMember.spec)) {
+        changedMembers.push(newMember.id);
+      }
+    });
+    
+    // Actualizar el estado de los miembros
+    setRaidMembers(newRaidMembers);
+    
+    // Eliminar asignaciones para los miembros que cambiaron de clase o spec
+    if (changedMembers.length > 0) {
+      setAssignments(assignments.filter(
+        assignment => !changedMembers.includes(assignment.healerId)
+      ));
     }
   };
   
@@ -161,6 +186,7 @@ export const DataProvider = ({ children }) => {
     addRaidMember,
     removeRaidMember,
     updateRaidMember,
+    updateRaidMembers, // Nueva función
     
     // Funciones - Boss Events
     addBossEvent,

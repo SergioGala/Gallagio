@@ -1,8 +1,8 @@
-/* styles.css - Archivo de estilos para WoW Cooldown Planner */
+/* index.css - Archivo de estilos simplificado para WoW Cooldown Planner */
 
 /* Variables globales para temas y colores */
 :root {
-  /* Colores de clases de WoW */
+  /* Colores de clases de WoW - Mantenemos los originales */
   --priest-color: #FFFFFF;
   --paladin-color: #F58CBA;
   --druid-color: #FF7D0A;
@@ -22,13 +22,25 @@
   --defensive-color: #F87171;
   --utility-color: #FACC15;
   
-  /* Colores de la interfaz */
+  /* Colores de la interfaz - Mantenemos un tema oscuro pero más limpio */
   --bg-color: #121212;
   --card-bg-color: #1F1F1F;
   --input-bg-color: #2D2D2D;
   --border-color: #374151;
   --text-color: #FFFFFF;
   --text-secondary-color: #A3A3A3;
+}
+
+/* Animaciones base simplificadas */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); }
+  70% { box-shadow: 0 0 0 5px rgba(255, 69, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0); }
 }
 
 /* Estilos base */
@@ -39,8 +51,30 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 
+/* Scrollbar mejorado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Container layout */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -68,9 +102,10 @@ body {
 .card-title {
   font-size: 1.25rem;
   font-weight: bold;
+  margin: 0;
 }
 
-/* Botones */
+/* Botones limpios */
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -105,7 +140,7 @@ body {
   font-size: 0.875rem;
 }
 
-/* Formularios */
+/* Formularios limpios */
 input, select, textarea {
   background-color: var(--input-bg-color);
   border: 1px solid var(--border-color);
@@ -146,9 +181,7 @@ label {
   }
 }
 
-/* Clases por componente específico */
-
-/* HealerManager */
+/* Healers y elementos arrastables */
 .healer-item {
   display: flex;
   align-items: center;
@@ -193,11 +226,52 @@ label {
   width: 100%;
 }
 
-/* BossEventManager */
+/* Drag and Drop Styles simplificados */
+.draggable-spell {
+  transition: all 0.2s ease;
+  cursor: grab;
+}
+
+.draggable-spell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.draggable-spell:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+.droppable-timeline {
+  border: 2px dashed transparent;
+  transition: all 0.2s ease;
+}
+
+.droppable-timeline.drag-over {
+  border-color: var(--healing-color);
+  background-color: rgba(74, 222, 128, 0.1);
+}
+
+/* Timeline */
+.timeline-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.timeline-scroll-container {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.timeline-content {
+  position: relative;
+  min-width: 1500px; /* Hacemos la línea de tiempo más larga */
+}
+
 .timeline-ruler {
   position: relative;
   height: 2rem;
-  background-color: var(--input-bg-color);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 0.25rem;
   margin-bottom: 1rem;
   overflow: hidden;
@@ -206,26 +280,76 @@ label {
 .timeline-marker {
   position: absolute;
   height: 100%;
-  width: 2px;
+  width: 1px;
   background-color: var(--text-secondary-color);
 }
 
 .timeline-event {
   position: absolute;
   height: 100%;
-  width: 4px;
+  width: 3px;
   background-color: var(--utility-color);
   transform: translateX(-50%);
   cursor: pointer;
 }
 
-.event-time {
-  width: 4rem;
-  font-family: monospace;
-  color: var(--utility-color);
+.timeline-row-content {
+  position: relative;
+  height: 2.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  overflow: visible;
 }
 
-/* AssignmentManager */
+.timeline-cooldown {
+  position: absolute;
+  height: 80%;
+  top: 10%;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-cooldown:hover {
+  transform: translateY(-2px);
+}
+
+.timeline-cooldown.healing {
+  background-color: var(--healing-color);
+}
+
+.timeline-cooldown.defensive {
+  background-color: var(--defensive-color);
+}
+
+.timeline-cooldown.utility {
+  background-color: var(--utility-color);
+}
+
+.timeline-cooldown.in-conflict {
+  animation: pulse 1.5s infinite;
+}
+
+.timeline-cooldown.selected {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px white;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Filtros */
 .filter-button {
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
@@ -257,6 +381,7 @@ label {
   color: black;
 }
 
+/* Asignaciones */
 .assignment-group {
   border-left: 4px solid var(--utility-color);
   padding-left: 0.5rem;
@@ -274,57 +399,7 @@ label {
   border-bottom: none;
 }
 
-/* Timeline */
-.timeline-container {
-  position: relative;
-  margin-top: 2rem;
-}
-
-.timeline-grid {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 2px;
-}
-
-.timeline-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  height: 2.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.timeline-row-header {
-  padding: 0.5rem;
-  background-color: var(--card-bg-color);
-  font-weight: 500;
-}
-
-.timeline-row-content {
-  position: relative;
-  background-color: var(--input-bg-color);
-}
-
-.timeline-cooldown {
-  position: absolute;
-  height: 80%;
-  top: 10%;
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-
-.timeline-cooldown.healing {
-  background-color: var(--healing-color);
-}
-
-.timeline-cooldown.defensive {
-  background-color: var(--defensive-color);
-}
-
-.timeline-cooldown.utility {
-  background-color: var(--utility-color);
-}
-
-/* Matrix Background */
+/* Matrix Background simplificado */
 .matrix-background {
   position: fixed;
   top: 0;
@@ -333,6 +408,7 @@ label {
   height: 100%;
   pointer-events: none;
   z-index: -1;
+  opacity: 0.1;
 }
 
 .matrix-char {
@@ -341,24 +417,9 @@ label {
   font-family: monospace;
   font-size: 12px;
   text-shadow: 0 0 5px #00FF00;
-  opacity: 0.3;
 }
 
-/* Tooltip */
-.tooltip {
-  position: absolute;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  max-width: 250px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-}
-
-/* SaveLoadPanel */
+/* Save/Load Panel */
 .import-export-area {
   margin-top: 1rem;
   padding: 1rem;
@@ -370,4 +431,86 @@ label {
   font-family: monospace;
   min-height: 120px;
   resize: vertical;
+}
+
+/* App Header simplificado */
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.wow-text {
+  color: var(--healing-color);
+}
+
+.app-subtitle {
+  color: var(--text-secondary-color);
+}
+
+/* Drop Zone Panel - Asignación Rápida */
+.drop-zone-panel {
+  margin-bottom: 1.5rem;
+}
+
+/* Controles de la línea de tiempo */
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+}
+
+.conflict-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Selected assignment panel */
+.selected-assignment-panel {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: var(--input-bg-color);
+  border-radius: 0.5rem;
+}
+
+.time-adjust {
+  display: flex;
+  align-items: center;
+}
+
+/* Personalización específica para la zona de asignación rápida */
+.droppable-timeline {
+  min-height: 80px;
+  margin-bottom: 1.5rem;
+  min-width: 1500px; /* Hacemos la zona de asignación rápida más larga igual que la línea de tiempo */
+  overflow-x: auto; /* Permitimos desplazamiento horizontal */
+  padding: 0.5rem;
+  position: relative;
+}
+
+/* Estilos para el contenedor de la zona de asignación rápida */
+.drop-zone-container {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+/* App footer */
+.app-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  color: var(--text-secondary-color);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
 }
